@@ -4,6 +4,7 @@ import java.util.*;
 
 class GamePlayer{
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         Fencer fencer = new Fencer("Frisk", 100, 30, 10, 5);
         Enemy enemy = new Enemy("Slaim", 30, 3, 3);
         
@@ -15,7 +16,7 @@ class GamePlayer{
         while(!(isEnd(fencer, enemy))) {
             printStatus(fencer);
             
-            switch(menu(fencer)) {
+            switch(menu(fencer, sc)) {
             case 1:
                 attackNormal(fencer, enemy);
                 break;
@@ -29,7 +30,7 @@ class GamePlayer{
             attackNormal(enemy, fencer);
         }
         
-        
+        sc.close();
     }
     
     public static void printStatus(Ally ally) {
@@ -56,14 +57,13 @@ class GamePlayer{
         return false;
     }
     
-    public static int menu(Ally ally) {
-        int input_menu;
-        Scanner sc = new Scanner(System.in);
+    public static int menu(Ally ally, Scanner sc) {
+        int input_menu = 0;
         System.out.println(ally.name + "はどうする?");
-        do {
-            System.out.println("1.通常攻撃  2.ヒール");
-            input_menu = sc.nextInt();
-        }while(input_menu <= 0 || 3 <= input_menu);
+            while(input_menu <= 0 || 3 <= input_menu){
+                System.out.println("1.通常攻撃  2.ヒール");
+                input_menu = Integer.parseInt(sc.nextLine());
+            }
         return input_menu;
     }
 }

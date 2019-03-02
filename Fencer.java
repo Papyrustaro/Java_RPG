@@ -11,9 +11,9 @@ class Fencer extends Ally{
         if(atk <= def) {
             damage = 1;
             this.hp--;
-        }else if(hp >= def - atk) {
-            damage = 2 * (def - atk);
-            this.hp -= 2 * (def - atk);
+        }else if(hp >= atk - def) {
+            damage = 2 * (atk - def);
+            this.hp -= 2 * (atk - def);
         }else {
             damage = this.hp;
             this.hp = 0;

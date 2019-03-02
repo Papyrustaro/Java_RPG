@@ -16,8 +16,8 @@ class Character{
             damage = 1;
             this.hp--;
         }else if(hp >= def - atk) {
-            damage = def - atk;
-            this.hp -= def - atk;
+            damage = atk - def;
+            this.hp -= atk - def;
         }else {
             damage = hp;
             this.hp = 0;
