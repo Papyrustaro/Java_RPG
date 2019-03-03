@@ -51,4 +51,9 @@ class Character{
         return this.def;
     }
     
+    public void attackNormal(Character atker, Character defer) {
+        System.out.println(atker.name + "の通常攻撃!!");
+        System.out.println(defer.name + "に" + defer.damaged(defer.hp, atker.atk, defer.def) + "のダメージ");
+    }
+    
 }
