@@ -1,9 +1,8 @@
 package rpg;
 
 class Slaim extends Enemy{
-    protected int skill_num = 6;
     Slaim(){
-        super("Slaim", 20, 10, 7);
+        super("Slaim", 20, 10, 7, "どこにでもいる敵。たまにウホウホする", 6);
     }
     
     //なにもしない

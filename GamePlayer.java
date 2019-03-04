@@ -6,24 +6,38 @@ import java.io.*;
 class GamePlayer{
     public static void main(String[] args) {
         Fencer fencer = new Fencer("Frisk", 100, 30, 10, 5);
-        Slaim slaim = new Slaim();
+        Enemy enemy = new Goblin();
         
-        System.out.println("*" + slaim.name + "が出現した!");
-        while(!(isEnd(fencer, slaim))) {
+        Random random = new Random();
+        int random_enemy = random.nextInt(2) + 1;
+        switch(random_enemy) {
+        case 1:
+            enemy = new Slaim();
+            break;
+        case 2:
+            enemy = new Goblin();
+            break;
+        }
+        
+        System.out.println("*" + enemy.name + "が出現した!");
+        while(!(isEnd(fencer, enemy))) {
             printStatus(fencer);
             
             switch(menu(fencer)) {
             case 1:
-                fencer.attackNormal(fencer, slaim);
+                fencer.attackNormal(fencer, enemy);
                 break;
             case 2:
                 if(!fencer.skillHeal()) continue; //スキルが発動できなかったら
                 break;
+            case 3:
+                enemy.printInfo(enemy);
+                break;
             }
             
-            if(isEnd(fencer, slaim)) break;
+            if(isEnd(fencer, enemy)) break;
             
-            slaim.skill(slaim, fencer, slaim.skill_num);
+            enemy.skill(enemy, fencer, enemy.skill_num);
         }
         
     }
@@ -56,8 +70,8 @@ class GamePlayer{
         int input_menu = 0;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println(ally.name + "はどうする?");
-        while(input_menu <= 0 || 3 <= input_menu){
-            System.out.println("1.通常攻撃  2.ヒール");
+        while(input_menu <= 0 || 4 <= input_menu){
+            System.out.println("1.通常攻撃  2.ヒール 3.調べる");
             try {
                 input_menu = Integer.parseInt(br.readLine());
             }catch(Exception e) {

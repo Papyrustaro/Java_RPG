@@ -3,8 +3,12 @@ package rpg;
 import java.util.*;
 
 class Enemy extends Character{
-    Enemy(String name, int hp, int atk, int def){
+    protected String info;
+    protected int skill_num;
+    
+    Enemy(String name, int hp, int atk, int def, String info, int skill_num){
         super(name, hp, atk, def);
+        this.info = info; this.skill_num = skill_num;
     }
     
     
@@ -34,8 +38,16 @@ class Enemy extends Character{
         }
         
     }
+    
+    public void printInfo(Enemy enemy) {
+        System.out.println("***" + enemy.name + "************");
+        System.out.println("HP: " + enemy.hp + " ATK: " + enemy.atk + " DEF: " + enemy.def);
+        System.out.println(enemy.info);
+        System.out.println("********************");
+    }
+    
     public void skill1(Enemy enemy, Ally ally) {
-        ;
+        ;   
     }
     public void skill2(Enemy enemy, Ally ally) {
         ;
@@ -52,5 +64,6 @@ class Enemy extends Character{
     public void skill6(Enemy enemy, Ally ally) {
         ;
     }
+    
     
 }
