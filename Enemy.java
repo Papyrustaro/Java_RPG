@@ -3,6 +3,7 @@ package rpg;
 import java.util.*;
 
 class Enemy extends Character{
+    protected int hp_max = hp;
     protected String info;
     protected int skill_num;
     
@@ -41,7 +42,7 @@ class Enemy extends Character{
     
     public void printInfo(Enemy enemy) {
         System.out.println("***" + enemy.name + "************");
-        System.out.println("HP: " + enemy.hp + " ATK: " + enemy.atk + " DEF: " + enemy.def);
+        System.out.println("HP: " + enemy.hp_max + " ATK: " + enemy.atk + " DEF: " + enemy.def);
         System.out.println(enemy.info);
         System.out.println("********************");
     }

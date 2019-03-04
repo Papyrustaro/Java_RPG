@@ -6,18 +6,7 @@ import java.io.*;
 class GamePlayer{
     public static void main(String[] args) {
         Fencer fencer = new Fencer("Frisk", 100, 30, 10, 5);
-        Enemy enemy = new Goblin();
-        
-        Random random = new Random();
-        int random_enemy = random.nextInt(2) + 1;
-        switch(random_enemy) {
-        case 1:
-            enemy = new Slaim();
-            break;
-        case 2:
-            enemy = new Goblin();
-            break;
-        }
+        Enemy enemy = selectEnemy();
         
         System.out.println("*" + enemy.name + "が出現した!");
         while(!(isEnd(fencer, enemy))) {
@@ -40,6 +29,20 @@ class GamePlayer{
             enemy.skill(enemy, fencer, enemy.skill_num);
         }
         
+    }
+    
+    public static Enemy selectEnemy() {
+        Random random = new Random();
+        int random_num = random.nextInt(2) + 1;
+        switch(random_num) {
+        case 1:
+            return (Enemy)(new Slaim());
+        case 2:
+            return (Enemy)(new Goblin());
+        default:
+            return (Enemy)(new Slaim());
+            
+        }
     }
     
     public static void printStatus(Ally ally) {

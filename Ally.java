@@ -1,9 +1,9 @@
 package rpg;
 
 class Ally extends Character{
-    protected int max_hp = hp;
+    protected int hp_max = hp;
     protected int mp;
-    protected int max_mp = mp;
+    protected int mp_max = mp;
     protected int level = 1;
     protected int exp = 0;
     
@@ -14,16 +14,16 @@ class Ally extends Character{
     
     
     public boolean skillHeal() {
-        if(this.hp == this.max_hp) {
+        if(this.hp == this.hp_max) {
             System.out.println("*体力は満タンだ");
             return false;
         }else if(this.mp < 5) {
             System.out.println("*MPが足りない!");
             return false;
-        }else if(this.hp + 30 > this.max_hp) {
+        }else if(this.hp + 30 > this.hp_max) {
             this.mp -= 5;
             System.out.println("*体力を全回復した");
-            this.hp = this.max_hp;
+            this.hp = this.hp_max;
             return true;
         }else {
             this.mp -= 5;
