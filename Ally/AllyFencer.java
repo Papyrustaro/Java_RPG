@@ -8,11 +8,17 @@ package rpg;
  * 
  * 
  * */
-class AllyFencer extends Ally{
+class AllyFencer extends Ally implements AllyInterface{
     AllyFencer(String name){
         super(name, 50, 15, 30, 20, 20, 15, 15, 5, 5, "フェンサー。バランスの取れた職業。");
     }
     AllyFencer(){
         super("フェンサー", 50, 15, 30, 20, 20, 15, 15, 5, 5, "フェンサー。バランスの取れた職業。");
+    }
+    
+    //レベルアップ時のステータスアップ
+    @Override
+    public void statusUp() {
+        statusUp(10, 3, 5, 4, 4, 3, 3);
     }
 }
