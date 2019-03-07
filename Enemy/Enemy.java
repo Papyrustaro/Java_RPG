@@ -2,7 +2,7 @@ package rpg;
 
 import java.util.*;
 
-class Enemy extends Character{
+abstract class Enemy extends Character{
     protected int exp;
     protected int skill_num;
     
