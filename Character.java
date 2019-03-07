@@ -1,6 +1,6 @@
 package rpg;
 
-class Character{
+abstract class Character{
     protected String name;
     protected int hp, atk, def, spd, sp_atk, sp_def;
     protected int evade_rate; //回避率

@@ -5,32 +5,32 @@ import java.io.*;
 
 class GamePlayer{
     public static void main(String[] args) {
-        AllyFencer fencer = new AllyFencer("Frisk");
-        Enemy enemy = selectEnemy();
+        AllyFencer ally = new AllyFencer("Frisk");
+        inputAllyName(ally);
         
-        inputAllyName(fencer);
-        
-        System.out.println("*" + enemy.name + "が出現した!");
-        while(!(isEnd(fencer, enemy))) {
-            printStatus(fencer);
+        while(ally.hp > 0) {
+            Enemy enemy = selectEnemy();
+            System.out.println("*" + enemy.name + "が出現した!");
             
-            switch(menu(fencer)) {
-            case 1:
-                fencer.attackNormal(fencer, enemy);
-                break;
-            case 2:
-                if(!fencer.skillHeal()) continue; //スキルが発動できなかったら
-                break;
-            case 3:
-                enemy.printInfo();
-                break;
+            while(!(isEnd(ally, enemy))) {
+                printStatus(ally);
+                
+                switch(menu(ally)) {
+                case 1:
+                    ally.attackNormal(ally, enemy);
+                    break;
+                case 2:
+                    if(!ally.skillHeal()) continue; //スキルが発動できなかったら
+                    break;
+                case 3:
+                    enemy.printInfo();
+                    break;
+                }
+                
+                if(isEnd(ally, enemy)) break;
+                enemy.skill(enemy, ally, enemy.skill_num);
             }
-            
-            if(isEnd(fencer, enemy)) break;
-            
-            enemy.skill(enemy, fencer, enemy.skill_num);
         }
-        fencer.getExp(enemy);
         
     }
     
@@ -61,15 +61,10 @@ class GamePlayer{
     }
     
     public static void printStatus(Ally ally) {
-        System.out.println("***" + ally.name + "**********");
-        System.out.println("HP: " + ally.hp + "   MP: " + ally.mp);
-        System.out.println("******************");
+        System.out.println("***" + ally.name + "************");
+        System.out.println("LV: " + ally.level + "  HP: " + ally.hp + "   MP: " + ally.mp);
+        System.out.println("********************");
     }
-    
-    /*public static void attackNormal(Character attacker, Character defender) {
-        System.out.println(attacker.name + "の通常攻撃");
-        System.out.println(defender.name + "に" + defender.damaged(defender.hp, attacker.atk, defender.def) + "のダメージ");
-    }*/
     
     public static boolean isEnd(Ally ally, Enemy enemy) {
         if(ally.hp <= 0) {
@@ -79,6 +74,7 @@ class GamePlayer{
         }else if(enemy.hp <= 0) {
             System.out.println(enemy.name + "は倒れた");
             System.out.println(ally.name + "の勝利!!");
+            ally.getExp(enemy);
             return true;
         }
         return false;
