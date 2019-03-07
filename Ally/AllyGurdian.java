@@ -5,7 +5,10 @@ package rpg;
  * */
 
 class AllyGurdian extends Ally{
-    AllyGurdian(String name, int hp, int mp, int atk, int def){
-        super(name, hp, mp, atk, def);
+    AllyGurdian(String name){
+        super(name, 100, 12, 10, 40, 10, 5, 40, 0, 0, "ガーディアン。守りに徹した職業。");
+    }
+    AllyGurdian(){
+        super("ガーディアン", 100, 12, 10, 40, 10, 5, 40, 0, 0, "ガーディアン。守りに徹した職業。");
     }
 }

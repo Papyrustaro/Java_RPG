@@ -3,29 +3,16 @@ package rpg;
 
 /*職業: 剣士(AllyFencer)
  *特徴: バランスのとれた職業。平均的
- * 
+ *初期ステ: hp.50, mp.15, atk.30, def.20, spd.20, sp_atk.15, sp_def.15, evade_rate.5, criti_rate.5
  * 
  * 
  * 
  * */
 class AllyFencer extends Ally{
-    AllyFencer(String name, int hp, int mp, int atk, int def){
-        super(name, hp, mp, atk, def);
+    AllyFencer(String name){
+        super(name, 50, 15, 30, 20, 20, 15, 15, 5, 5, "フェンサー。バランスの取れた職業。");
     }
-    
-    @Override
-    public int damaged(int hp, int atk, int def) {
-        int damage;
-        if(atk <= def) {
-            damage = 1;
-            this.hp--;
-        }else if(hp >= atk - def) {
-            damage = 2 * (atk - def);
-            this.hp -= 2 * (atk - def);
-        }else {
-            damage = this.hp;
-            this.hp = 0;
-        }
-        return damage;
+    AllyFencer(){
+        super("フェンサー", 50, 15, 30, 20, 20, 15, 15, 5, 5, "フェンサー。バランスの取れた職業。");
     }
 }

@@ -5,7 +5,12 @@ package rpg;
  * */
 
 class AllyWitch extends Ally{
-    AllyWitch(String name, int hp, int mp, int atk, int def){
-        super(name, hp, mp, atk, def);
+    
+    AllyWitch(String name){
+        super(name, 30, 45, 5, 10, 13, 50, 50, 0, 0, "ウィッチ。強力な魔法を放つ。");
+    }
+    
+    AllyWitch(){
+        super("ウィッチ", 30, 45, 5, 10, 13, 50, 50, 0, 0, "ウィッチ。強力な魔法を放つ。");
     }
 }
