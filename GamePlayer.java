@@ -5,8 +5,10 @@ import java.io.*;
 
 class GamePlayer{
     public static void main(String[] args) {
-        Fencer fencer = new Fencer("Frisk", 100, 30, 10, 5);
+        AllyFencer fencer = new AllyFencer("Frisk");
         Enemy enemy = selectEnemy();
+        
+        inputAllyName(fencer);
         
         System.out.println("*" + enemy.name + "が出現した!");
         while(!(isEnd(fencer, enemy))) {
@@ -20,7 +22,7 @@ class GamePlayer{
                 if(!fencer.skillHeal()) continue; //スキルが発動できなかったら
                 break;
             case 3:
-                enemy.printInfo(enemy);
+                enemy.printInfo();
                 break;
             }
             
@@ -28,6 +30,7 @@ class GamePlayer{
             
             enemy.skill(enemy, fencer, enemy.skill_num);
         }
+        fencer.getExp(enemy);
         
     }
     
@@ -36,12 +39,24 @@ class GamePlayer{
         int random_num = random.nextInt(2) + 1;
         switch(random_num) {
         case 1:
-            return (Enemy)(new Slaim());
+            return (Enemy)(new EnemySlaim());
         case 2:
-            return (Enemy)(new Goblin());
-        default:
-            return (Enemy)(new Slaim());
-            
+            return (Enemy)(new EnemyGoblin());
+        }
+        
+        return (Enemy)(new EnemySlaim());
+    }
+    
+    public static void inputAllyName(Ally ally) {
+        String input_name;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        System.out.println("主人公の名前を入力してください");
+        try {
+            input_name = br.readLine();
+            ally.setName(input_name);
+        }catch(Exception e) {
+            System.out.println("入力が正しくありません");
         }
     }
     
