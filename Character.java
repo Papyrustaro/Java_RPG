@@ -26,29 +26,67 @@ abstract class Character{
         this.sp_def_max = sp_def; this.evade_rate_max = evade_rate; this.criti_rate_max = criti_rate;
     }
     
-    public int damaged(int hp, int atk, int def) {
-        int damage;
-        if(atk <= def) { //防御力＞攻撃力
+    //最大ダメージ<=HP
+    public int physicalAttack(Character target, int power) { //powerは100で等倍
+        int damage = (this.atk * power / 100) - target.def;
+        
+        if(damage <= 0) { //1ダメージしか与えられない
             damage = 1;
-            this.hp--;
-        }else if(hp >= atk - def) {
-            damage = atk - def;
-            this.hp -= atk - def;
-        }else {
-            damage = hp;
-            this.hp = 0;
         }
+        if(target.hp < damage) { //deferが倒れるとき
+            damage = target.hp;
+        }
+        target.hp -= damage;
         return damage;
     }
     
-    public int damaged(int hp, int damage_point) {
-        if(hp >= damage_point) {
-            this.hp -= damage_point;
+    public int specialAttack(Character target, int power) { //powerは100で等倍
+        int damage = (this.sp_atk * power / 100) - target.sp_def;
+        
+        if(damage <= 0) { //1ダメージしか与えられない
+            damage = 1;
+        }
+        if(target.hp < damage) { //deferが倒れるとき
+            damage = target.hp;
+        }
+        target.hp -= damage;
+        return damage;
+    }
+    
+    public int damaged(Character target, int damage_point) { //固定ダメージ
+        if(target.hp >= damage_point) {
+            target.hp -= damage_point;
         }else {
-            damage_point = hp;
-            this.hp = 0;
+            damage_point = target.hp;
+            target.hp = 0;
         }
         return damage_point;
+    }
+    
+    public int recoverHp(int recovery_point) {
+        int recovery;
+        if(this.hp == this.hp_max) {
+            recovery = 0;
+        }else if(this.hp + recovery_point > this.hp_max) {
+            recovery = this.hp_max - this.hp;
+            this.hp = this.hp_max;
+        }else {
+            recovery = recovery_point;
+        }
+        return recovery;
+    }
+    
+    public int recoverHp(Character target, int recovery_point) {
+        int recovery;
+        if(target.hp == target.hp_max) {
+            recovery = 0;
+        }else if(target.hp + recovery_point > target.hp_max) {
+            recovery = target.hp_max - target.hp;
+            target.hp = target.hp_max;
+        }else {
+            recovery = recovery_point;
+        }
+        return recovery;
     }
     
     public String getName() {
@@ -67,9 +105,9 @@ abstract class Character{
         return this.def;
     }
     
-    public void attackNormal(Character atker, Character defer) {
-        System.out.println(atker.name + "の通常攻撃!!");
-        System.out.println(defer.name + "に" + defer.damaged(defer.hp, atker.atk, defer.def) + "のダメージ");
+    public void normalAttack(Character target) {
+        System.out.println(this.name + "の通常攻撃!!");
+        System.out.println(target.name + "に" + this.physicalAttack(target, 100) + "のダメージ");
     }
     
 }

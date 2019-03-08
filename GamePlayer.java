@@ -9,26 +9,27 @@ class GamePlayer{
         inputAllyName(ally);
         
         while(ally.hp > 0) {
+            int ally_turn = 1000;
+            int enemy_turn = 1000;
+            
             Enemy enemy = selectEnemy();
             System.out.println("*" + enemy.name + "が出現した!");
             
-            while(!(isEnd(ally, enemy))) {
-                printStatus(ally);
-                
-                switch(menu(ally)) {
-                case 1:
-                    ally.attackNormal(ally, enemy);
-                    break;
-                case 2:
-                    if(!ally.skillHeal()) continue; //スキルが発動できなかったら
-                    break;
-                case 3:
-                    enemy.printInfo();
-                    break;
+            while(!(battleEnd(ally, enemy))) {
+                boolean flag = true;
+                while(flag) {
+                   ally_turn -= ally.spd;
+                   enemy_turn -= enemy.spd;
+                   if(ally_turn <= 0) {
+                       ally_turn += 1000;
+                       allyTurn(ally, enemy);
+                       flag = false;
+                   }if(enemy_turn <= 0){
+                       enemy_turn += 1000;
+                       enemy.skill(ally, enemy.skill_num);
+                       flag = false;
+                   }
                 }
-                
-                if(isEnd(ally, enemy)) break;
-                enemy.skill(enemy, ally, enemy.skill_num);
             }
         }
         
@@ -66,7 +67,7 @@ class GamePlayer{
         System.out.println("********************");
     }
     
-    public static boolean isEnd(Ally ally, Enemy enemy) {
+    public static boolean battleEnd(Ally ally, Enemy enemy) {
         if(ally.hp <= 0) {
             System.out.println(ally.name + "は倒れた");
             System.out.println(ally.name + "は敗北した");
@@ -93,5 +94,33 @@ class GamePlayer{
             }
         }
         return input_menu;
+    }
+    
+    public static void allyTurn(Ally ally, Enemy enemy) {
+        
+        boolean flag = false;
+        do {
+            printStatus(ally);
+            switch(menu(ally)) {
+            case 1:
+                ally.normalAttack(enemy);
+                break;
+            case 2:
+                if(!ally.skillHeal()); //スキルが発動できなかったら
+                flag = true;
+                break;
+            case 3:
+                enemy.printInfo();
+                break;
+            }
+        }while(flag);
+    }
+    
+    public static boolean allySkill(Ally ally) {
+        int skill_num = ally.level / 5 + 1; //5レベルごとにスキルひとつ覚える
+        System.out.println("*************************");
+        for(int i = 0; i < skill_num; i++) {
+            System.out.println(i + "." + ally.skill_name[i]); //手詰まり。
+        }
     }
 }
