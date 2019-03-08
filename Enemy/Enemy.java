@@ -12,28 +12,28 @@ abstract class Enemy extends Character{
     }
     
     
-    public void skill(Enemy enemy, Ally ally, int skill_num) {
+    public void skill(Character target, int skill_num) {
         Random random = new Random();
         int random_num = random.nextInt(skill_num) + 1;
         
         switch(random_num) {
         case 1:
-            skill1(enemy, ally);
+            skill1(target);
             break;
         case 2:
-            skill2(enemy, ally);
+            skill2(target);
             break;
         case 3:
-            skill3(enemy, ally);
+            skill3(target);
             break;
         case 4:
-            skill4(enemy, ally);
+            skill4(target);
             break;
         case 5:
-            skill5(enemy, ally);
+            skill5(target);
             break;
         case 6:
-            skill6(enemy, ally);
+            skill6(target);
             break;
         }
         
@@ -47,22 +47,22 @@ abstract class Enemy extends Character{
         System.out.println("********************");
     }
     
-    public void skill1(Enemy enemy, Ally ally) {
+    public void skill1(Character target) {
         ;   
     }
-    public void skill2(Enemy enemy, Ally ally) {
+    public void skill2(Character target) {
         ;
     }
-    public void skill3(Enemy enemy, Ally ally) {
+    public void skill3(Character target) {
         ;
     }
-    public void skill4(Enemy enemy, Ally ally) {
+    public void skill4(Character target) {
         ;
     }
-    public void skill5(Enemy enemy, Ally ally) {
+    public void skill5(Character target) {
         ;
     }
-    public void skill6(Enemy enemy, Ally ally) {
+    public void skill6(Character target) {
         ;
     }
     
