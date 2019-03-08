@@ -13,4 +13,9 @@ class AllyWitch extends Ally{
     AllyWitch(){
         super("ウィッチ", 30, 45, 5, 10, 13, 50, 50, 0, 0, "ウィッチ。強力な魔法を放つ。");
     }
+    
+    @Override
+    public void statusUp() {
+        ;
+    }
 }

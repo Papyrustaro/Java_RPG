@@ -13,4 +13,9 @@ class AllyFighter extends Ally{
     AllyFighter(){
         super("ファイター", 70, 10, 38, 15, 27, 10, 10, 15, 5, "ファイター。素早さ、回避率が高く短期決戦型。");
     }
+    
+    @Override
+    public void statusUp() {
+        ;
+    }
 }

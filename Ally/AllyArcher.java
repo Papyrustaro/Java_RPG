@@ -14,4 +14,9 @@ class AllyArcher extends Ally{
     AllyArcher(){
         super("アーチャー", 35, 20, 30, 15, 30, 20, 12, 10, 10, "アーチャー。足が速く技も多彩だが打たれ弱い。");
     }
+    
+    @Override
+    public void statusUp() {
+        ;
+    }
 }

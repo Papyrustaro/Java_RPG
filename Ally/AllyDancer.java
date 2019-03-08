@@ -12,4 +12,9 @@ class AllyDancer extends Ally{
     AllyDancer(){
         super("ダンサー", 35, 25, 15, 17, 26, 15, 22, 5, 0, "ダンサー。支援系スキルが豊富。");
     }
+    
+    @Override
+    public void statusUp() {
+        ;
+    }
 }

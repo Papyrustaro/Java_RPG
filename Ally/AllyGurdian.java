@@ -11,4 +11,9 @@ class AllyGurdian extends Ally{
     AllyGurdian(){
         super("ガーディアン", 100, 12, 10, 40, 10, 5, 40, 0, 0, "ガーディアン。守りに徹した職業。");
     }
+    
+    @Override
+    public void statusUp() {
+        ;
+    }
 }

@@ -13,4 +13,9 @@ class AllyMonk extends Ally{
     AllyMonk(){
         super("モンク", 30, 30, 10, 15, 15, 30, 35, 5, 10, "モンク。神への信仰から様々な恩恵を受ける。");
     }
+    
+    @Override
+    public void statusUp() {
+        ;
+    }
 }
